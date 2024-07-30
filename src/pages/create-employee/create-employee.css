@@ -1,0 +1,18 @@
+.title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.create-employee-container {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+#create-employee {
+    margin: 40px auto;
+    padding: 40px;
+    width: 75%;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    box-shadow: gray 0 0 5px;
+}
