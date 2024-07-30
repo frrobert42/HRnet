@@ -4,10 +4,21 @@ import {CheckIcon, ChevronUpDownIcon} from "@heroicons/react/16/solid";
 import {useState} from "react";
 import {states} from "../../data/states";
 import {departments} from "../../data/departments";
+import Datepicker from "react-tailwindcss-datepicker";
 
 export default function CreateEmployee() {
     const [state, setState] = useState('Select State');
     const [department, setDepartment] = useState('Select Department');
+    const [dateOfBirth, setDateOfBirth] = useState(new Date());
+    const [startDate, setStartDate] = useState(new Date());
+
+    const handleDateOfBirthChange = (date) => {
+        setDateOfBirth(date);
+    }
+
+    const handleStartDateChange = (date) => {
+        setStartDate(date);
+    }
 
     return (
         <div>
@@ -59,37 +70,27 @@ export default function CreateEmployee() {
                             </div>
                         </div>
 
-                        <div className="flex flex-row gap-x-10 w-full">
-                            <div className="w-1/2 m-auto">
-                                <label htmlFor="date-of-birth"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
-                                    Date of Birth
-                                </label>
-                                <div className="mt-2">
-                                    <input
-                                        id="date-of-birth"
-                                        name="date-of-birth"
-                                        type="date"
-                                        required
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
-                                </div>
+                        <div className="w-full flex flex-row gap-x-10">
+                            <div className="w-1/2">
+                                <Datepicker
+                                    placeholder={"Date of Birth"}
+                                    primaryColor="blue"
+                                    asSingle={true}
+                                    useRange={false}
+                                    value={dateOfBirth}
+                                    onChange={handleDateOfBirthChange}
+                                />
                             </div>
 
                             <div className="w-1/2 m-auto">
-                                <label htmlFor="start-date"
-                                       className="block text-sm font-medium leading-6 text-gray-900">
-                                    Start Date
-                                </label>
-                                <div className="mt-2">
-                                    <input
-                                        id="start-date"
-                                        name="start-date"
-                                        type="date"
-                                        required
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
-                                </div>
+                                <Datepicker
+                                    placeholder={"Start Date"}
+                                    primaryColor="blue"
+                                    asSingle={true}
+                                    useRange={false}
+                                    value={startDate}
+                                    onChange={handleStartDateChange}
+                                />
                             </div>
                         </div>
 
@@ -170,61 +171,61 @@ export default function CreateEmployee() {
                             </Listbox>
                         </div>
 
-                            <div className="w-full">
-                                <label htmlFor="zip-code" className="block text-sm font-medium leading-6 text-gray-900">
-                                    Zip Code
-                                </label>
-                                <div className="mt-2">
-                                    <input
-                                        id="zip-code"
-                                        name="zip-code"
-                                        type="text"
-                                        autoComplete="postal-code"
-                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    />
-                                </div>
+                        <div className="w-full">
+                            <label htmlFor="zip-code" className="block text-sm font-medium leading-6 text-gray-900">
+                                Zip Code
+                            </label>
+                            <div className="mt-2">
+                                <input
+                                    id="zip-code"
+                                    name="zip-code"
+                                    type="text"
+                                    autoComplete="postal-code"
+                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                />
                             </div>
+                        </div>
 
-                            <div>
-                                <Listbox value={department} onChange={setDepartment}>
+                        <div>
+                            <Listbox value={department} onChange={setDepartment}>
 
-                                    <Label htmlFor="department"
-                                           className="block text-sm font-medium leading-6 text-gray-900">Department</Label>
-                                    <div className="relative mt-2">
-                                        <ListboxButton
-                                            className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
-                                            <span className="block truncate">{department}</span>
-                                            <span
-                                                className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                <Label htmlFor="department"
+                                       className="block text-sm font-medium leading-6 text-gray-900">Department</Label>
+                                <div className="relative mt-2">
+                                    <ListboxButton
+                                        className="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                                        <span className="block truncate">{department}</span>
+                                        <span
+                                            className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                                         <ChevronUpDownIcon aria-hidden="true" className="h-5 w-5 text-gray-400"/>
                                     </span>
-                                        </ListboxButton>
-                                    </div>
+                                    </ListboxButton>
+                                </div>
 
-                                    <ListboxOptions
-                                        transition
-                                        className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
-                                    >
-                                        {departments.map((department) =>
-                                            <ListboxOption
-                                                key={department}
-                                                value={department}
-                                                className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white">
+                                <ListboxOptions
+                                    transition
+                                    className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none data-[closed]:data-[leave]:opacity-0 data-[leave]:transition data-[leave]:duration-100 data-[leave]:ease-in sm:text-sm"
+                                >
+                                    {departments.map((department) =>
+                                        <ListboxOption
+                                            key={department}
+                                            value={department}
+                                            className="group relative cursor-default select-none py-2 pl-3 pr-9 text-gray-900 data-[focus]:bg-indigo-600 data-[focus]:text-white">
                                                 <span
                                                     className="block truncate font-normal group-data-[selected]:font-semibold">
                                                     {department}
                                                 </span>
-                                                <span
-                                                    className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
+                                            <span
+                                                className="absolute inset-y-0 right-0 flex items-center pr-4 text-indigo-600 group-data-[focus]:text-white [.group:not([data-selected])_&]:hidden">
                                                     <CheckIcon aria-hidden="true" className="h-5 w-5"/>
                                                 </span>
-                                            </ListboxOption>
-                                        )
-                                        }
-                                    </ListboxOptions>
-                                </Listbox>
+                                        </ListboxOption>
+                                    )
+                                    }
+                                </ListboxOptions>
+                            </Listbox>
 
-                            </div>
+                        </div>
 
                         <button onClick="saveEmployee()">Save</button>
 

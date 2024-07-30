@@ -16,3 +16,7 @@
     border-radius: 5px;
     box-shadow: gray 0 0 5px;
 }
+
+input {
+    border: 1px solid lightgrey;
+}
