@@ -155,7 +155,7 @@ export default function CreateEmployee() {
 
 
                                 <div className="w-1/2 m-auto">
-                                    <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">
+                                    <label htmlFor="street" className="block text-sm font-medium leading-6 text-gray-900">
                                         Street
                                     </label>
                                     <div className="mt-2">
@@ -273,7 +273,9 @@ export default function CreateEmployee() {
                                     </div>
                                 </Listbox>
                             </div>
-                            <button onClick={saveEmployee} type="button"
+                            <button onClick={saveEmployee}
+                                    type="button"
+                                    aria-label="save"
                                     className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                 Save
                             </button>
