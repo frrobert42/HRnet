@@ -1,20 +1,25 @@
-import { createSlice } from '@reduxjs/toolkit'
+import {createSlice} from '@reduxjs/toolkit';
+
 
 const initialState = {
-    employee: [],
-}
+    employees: [],
+};
 
 export const employeeSlice = createSlice({
-    name: 'employee',
+    name: 'employees',
     initialState,
     reducers: {
         addEmployee: (state, action) => {
-            state.employee.push(action.payload)
+            state.employees.push(action.payload);
+            localStorage.setItem('employees', JSON.stringify(state.employees));
+        },
+        getEmployee: (state) => {
+            if (!localStorage.getItem('employees')) localStorage.setItem('employees', JSON.stringify([]));
+            state.employees = JSON.parse(localStorage.getItem('employees'));
         },
     },
-})
+});
 
-// Action creators are generated for each case reducer function
-export const { addEmployee } = employeeSlice.actions
+export const { addEmployee, getEmployee } = employeeSlice.actions;
 
-export default employeeSlice.reducer
+export default employeeSlice.reducer;

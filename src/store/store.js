@@ -3,6 +3,6 @@ import employeeReducer from "./employee-reducer";
 
 export const store = configureStore({
     reducer: {
-        employee: employeeReducer,
+        employees: employeeReducer,
     },
 })

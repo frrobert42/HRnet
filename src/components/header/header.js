@@ -1,8 +1,7 @@
-'use client'
-
 import { useState } from 'react'
 import { Dialog, DialogPanel } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Link } from "react-router-dom";
 
 export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -11,9 +10,9 @@ export default function Header() {
         <header className="bg-white">
             <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
                 <div className="flex lg:flex-1">
-                    <a href="/" className="-m-1.5 p-1.5">
+                    <Link to="/" className="-m-1.5 p-1.5">
                         <h1 className="h1 font-bold">Hrnet</h1>
-                    </a>
+                    </Link>
                 </div>
                 <div className="flex lg:hidden">
                     <button
@@ -28,9 +27,9 @@ export default function Header() {
                 <div className="hidden lg:flex lg:gap-x-12">
                     {
                         window.location.pathname !== '/employee-list' &&
-                        <a href="/employee-list" className="underline text-sm font-semibold leading-6 text-gray-900">
+                        <Link to="/employee-list" className="underline text-sm font-semibold leading-6 text-gray-900">
                             View Current Employees
-                        </a>
+                        </Link>
                     }
                     {
                         window.location.pathname === '/employee-list' &&
@@ -45,9 +44,9 @@ export default function Header() {
                 <div className="fixed inset-0 z-10" />
                 <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
                     <div className="flex items-center justify-between">
-                        <a href="/" className="-m-1.5 p-1.5">
+                        <Link to="/" className="-m-1.5 p-1.5">
                             <h1 className="font-bold">Hrnet</h1>
-                        </a>
+                        </Link>
                         <button
                             type="button"
                             onClick={() => setMobileMenuOpen(false)}

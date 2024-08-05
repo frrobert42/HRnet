@@ -1,11 +1,19 @@
 import "./employee-list.css"
 import Header from "../../components/header/header";
+import {useDispatch, useSelector} from "react-redux";
+import {getEmployee} from "../../store/employee-reducer";
 
 export default function EmployeeList() {
-    const employees = localStorage.getItem('employees') ? JSON.parse(localStorage.getItem('employees')) : [];
+    const dispatch = useDispatch();
+    dispatch(getEmployee());
+    const employees = useSelector((state) => state?.employees.employees);
+
+
+    console.log(employees);
+
     return (
         <>
-            <Header />
+            <Header/>
             <div className="px-4 sm:px-6 lg:px-8">
                 <div className="mt-8 flow-root">
                     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -55,16 +63,32 @@ export default function EmployeeList() {
                                 {employees.map((employee, i = 0) => (
                                     <tr key={employee.firstName + i++}>
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            {employee.firstName}
+                                            {employee.firstName.charAt(0).toUpperCase() + employee.firstName.slice(1)}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{employee.lastName}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{employee.startDate.toString()}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{employee.department}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{employee.dateOfBirth.toString()}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{employee.street}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{employee.city}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{employee.state}</td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{employee.zipCode}</td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900">
+                                            {employee.lastName.charAt(0).toUpperCase() + employee.lastName.slice(1)}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {employee.startDate.startDate}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {employee.department}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {employee.dateOfBirth.startDate}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {employee.street}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {employee.city.toUpperCase()}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {employee.state}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {employee.zipCode}
+                                        </td>
                                     </tr>
                                 ))}
                                 </tbody>

@@ -7,21 +7,27 @@ import {departments} from "../../data/departments";
 import Datepicker from "react-tailwindcss-datepicker";
 import Modal from "modal-react-p14";
 import Header from "../../components/header/header";
+import {addEmployee} from "../../store/employee-reducer";
+import {useDispatch} from "react-redux";
 
 export default function CreateEmployee() {
     const [state, setState] = useState('Select State');
     const [selectedDepartment, setSelectedDepartment] = useState(null);
-    const [dateOfBirth, setDateOfBirth] = useState(new Date());
-    const [startDate, setStartDate] = useState(new Date());
+    const [dateOfBirth, setDateOfBirth] = useState(null);
+    const [startDate, setStartDate] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
+    const dispatch = useDispatch();
 
     const handleDateOfBirthChange = (date) => {
         setDateOfBirth(date);
     }
-
     const handleStartDateChange = (date) => {
         setStartDate(date);
     }
+
+    const handleAddEmployee = (employee) => {
+        dispatch(addEmployee(employee));
+    };
 
     const saveEmployee = () => {
         // check if all fields are filled
@@ -34,7 +40,6 @@ export default function CreateEmployee() {
         // check if state is selected
         if (state === 'Select State') {
             alert('Please select a state');
-            // set form to invalid
             return;
         }
 
@@ -44,7 +49,7 @@ export default function CreateEmployee() {
             return;
         }
 
-        const employee = {
+        let employee = {
             firstName: document.getElementById('first-name').value,
             lastName: document.getElementById('last-name').value,
             dateOfBirth: dateOfBirth,
@@ -55,29 +60,25 @@ export default function CreateEmployee() {
             zipCode: document.getElementById('zip-code').value,
             department: selectedDepartment.name
         }
-        console.log(employee);
-        // add employee to the list of employees in local storage
-        let employees = JSON.parse(localStorage.getItem('employees')) || [];
-        employees.push(employee);
-        localStorage.setItem('employees', JSON.stringify(employees));
-        // show confirmation modal
+
+        handleAddEmployee(employee)
+
+        form.reset();
+        setDateOfBirth(null);
+        setStartDate(null);
+        setState('Select State');
+        employee = null;
+
+        // Show confirmation modal
         setModalOpen(true);
     }
 
     return (
         <>
             <div className="mb-72">
-                {/*<div className="text-center my-3">*/}
-                {/*    <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">HRnet</h1>*/}
-                {/*</div>*/}
                 <Header />
 
                 <div className="create-employee-container">
-                    {/*<a href="/employee-list" className="underline cursor-pointer">View Current Employees</a>*/}
-                    {/*<div className="mt-2 mb-0">*/}
-                    {/*    <h2 className="text-xl font-bold">Create Employee</h2>*/}
-                    {/*</div>*/}
-
                     <div className="sm:mx-auto">
                         <form action="#" id="create-employee" className="text-left space-y-3">
                             <div className="flex flex-row gap-x-10 w-full">
@@ -118,9 +119,12 @@ export default function CreateEmployee() {
 
                             <div className="w-full flex flex-row gap-x-10">
                                 <div className="w-1/2">
+                                    <label htmlFor="dateOfBirth"
+                                           className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+                                        Date of Birth
+                                    </label>
                                     <Datepicker
                                         placeholder={"Date of Birth"}
-                                        primaryColor="blue"
                                         asSingle={true}
                                         useRange={false}
                                         value={dateOfBirth}
@@ -129,9 +133,12 @@ export default function CreateEmployee() {
                                 </div>
 
                                 <div className="w-1/2 m-auto">
+                                    <label htmlFor="startDate"
+                                           className="block text-sm font-medium leading-6 text-gray-900 mb-2">
+                                        Start Date
+                                    </label>
                                     <Datepicker
                                         placeholder={"Start Date"}
-                                        primaryColor="blue"
                                         asSingle={true}
                                         useRange={false}
                                         value={startDate}
