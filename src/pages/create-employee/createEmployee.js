@@ -61,15 +61,17 @@ export default function CreateEmployee() {
             department: selectedDepartment.name
         }
 
+        // save employee
         handleAddEmployee(employee)
 
+        // clear form
         form.reset();
         setDateOfBirth(null);
         setStartDate(null);
         setState('Select State');
         employee = null;
 
-        // Show confirmation modal
+        // show modal
         setModalOpen(true);
     }
 

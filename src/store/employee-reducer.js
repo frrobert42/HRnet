@@ -1,25 +1,59 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-
-const initialState = {
-    employees: [],
-};
-
 export const employeeSlice = createSlice({
     name: 'employees',
-    initialState,
+    initialState: {
+        employees: [
+            {
+                firstName: 'John',
+                lastName: 'Doe',
+                startDate: {startDate: '2021-01-01'},
+                department: 'Engineering',
+                dateOfBirth: {startDate: '1990-01-01'},
+                street: '123 Main St',
+                city: 'Springfield',
+                state: 'IL',
+                zipCode: '62701',
+            },
+            {
+                firstName: 'AJohn',
+                lastName: 'ADoe',
+                startDate: {startDate: '2021-01-01'},
+                department: 'Engineering',
+                dateOfBirth: {startDate: '1990-01-01'},
+                street: '123 Main St',
+                city: 'Springfield',
+                state: 'IL',
+                zipCode: '62701',
+            },
+            {
+                firstName: 'zJohn',
+                lastName: 'zDoe',
+                startDate: {startDate: '2021-01-01'},
+                department: 'Engineering',
+                dateOfBirth: {startDate: '1990-01-01'},
+                street: '123 Main St',
+                city: 'Springfield',
+                state: 'IL',
+                zipCode: '62701',
+            },
+        ],
+    },
     reducers: {
         addEmployee: (state, action) => {
-            state.employees.push(action.payload);
-            localStorage.setItem('employees', JSON.stringify(state.employees));
+            const newEmployee = action.payload
+            state.employees.push(newEmployee);
         },
-        getEmployee: (state) => {
-            if (!localStorage.getItem('employees')) localStorage.setItem('employees', JSON.stringify([]));
-            state.employees = JSON.parse(localStorage.getItem('employees'));
+        sortEmployee: (state, action) => {
+            state.employees.sort((a, b) => {
+                if (a[action.payload] < b[action.payload]) return -1;
+                if (a[action.payload] > b[action.payload]) return 1;
+                return 0;
+            });
         },
-    },
+    }
 });
 
-export const { addEmployee, getEmployee } = employeeSlice.actions;
+export const { addEmployee, sortEmployee} = employeeSlice.actions;
 
 export default employeeSlice.reducer;

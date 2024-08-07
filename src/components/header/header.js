@@ -63,11 +63,11 @@ export default function Header() {
                             <div className="space-y-2 py-6">
                                 {
                                     window.location.pathname !== '/employee-list' &&
-                                    <a href="/employee-list"
+                                    <Link to="/employee-list"
                                         className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                                     >
                                         View Current Employees
-                                    </a>
+                                    </Link>
                                 }
                             </div>
                         </div>

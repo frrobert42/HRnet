@@ -1,15 +1,25 @@
 import "./employee-list.css"
 import Header from "../../components/header/header";
-import {useDispatch, useSelector} from "react-redux";
-import {getEmployee} from "../../store/employee-reducer";
+import {useSelector} from "react-redux";
+import {ChevronDownIcon} from "@heroicons/react/16/solid";
+import {useState} from "react";
+
+let i = 0;
 
 export default function EmployeeList() {
-    const dispatch = useDispatch();
-    dispatch(getEmployee());
-    const employees = useSelector((state) => state?.employees.employees);
+    const {employees} = useSelector((state) => state.employees);
+    const [displayEmployees, setDisplayEmployees] = useState(employees);
 
-
-    console.log(employees);
+    const sortBy = (key) => {
+        const sortedData = [...displayEmployees].sort((a, b) => (a[key] > b[key] ? 1 : -1));
+        // compare sortedData with displayEmployees
+        // if they are equal, reverse the array
+        if (JSON.stringify(sortedData) === JSON.stringify(displayEmployees)) {
+            sortedData.reverse();
+        }
+        setDisplayEmployees(sortedData);
+        console.log(key);
+    };
 
     return (
         <>
@@ -23,65 +33,119 @@ export default function EmployeeList() {
                                 <tr>
                                     <th scope="col"
                                         className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                                        First Name
+                                        <button onClick={() => sortBy('firstname')} className="group inline-flex">
+                                            First Name
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Last Name
+                                        <button onClick={() => sortBy('lastName')} className="group inline-flex">
+                                            Last Name
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Start Date
+                                        <button onClick={() => sortBy('startDate')} className="group inline-flex">
+                                            Start Date
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Department
+                                        <button onClick={() => sortBy('department')} className="group inline-flex">
+                                            Department
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Date of Birth
+                                        <button onClick={() => sortBy('dateOfBirth')} className="group inline-flex">
+                                            Date of Birth
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Street
+                                        <button onClick={() => sortBy('street')} className="group inline-flex">
+                                            Street
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        City
+                                        <button onClick={() => sortBy('city')} className="group inline-flex">
+                                            City
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        State
+                                        <button onClick={() => sortBy('state')} className="group inline-flex">
+                                            State
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                     <th scope="col"
                                         className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        Zip Code
+                                        <button onClick={() => sortBy('zipcode')} className="group inline-flex">
+                                            Zip Code
+                                            <span
+                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
+                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
+                                            </span>
+                                        </button>
                                     </th>
                                 </tr>
                                 </thead>
-                                <tbody className="divide-y divide-gray-200">
-                                {employees.map((employee, i = 0) => (
+                                <tbody className="divide-y divide-gray-200 bg-white">
+                                {displayEmployees && displayEmployees.map((employee) => (
                                     <tr key={employee.firstName + i++}>
                                         <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            {employee.firstName.charAt(0).toUpperCase() + employee.firstName.slice(1)}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm font-medium text-gray-900">
-                                            {employee.lastName.charAt(0).toUpperCase() + employee.lastName.slice(1)}
+                                            {employee.firstName?.charAt(0).toUpperCase() + employee.firstName?.slice(1)}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.startDate.startDate}
+                                            {employee.lastName?.charAt(0).toUpperCase() + employee.lastName?.slice(1)}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                            {employee.startDate?.startDate}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {employee.department}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.dateOfBirth.startDate}
+                                            {employee.dateOfBirth?.startDate}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {employee.street}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.city.toUpperCase()}
+                                            {employee.city?.toUpperCase()}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                             {employee.state}
