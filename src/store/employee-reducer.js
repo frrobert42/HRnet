@@ -1,59 +1,38 @@
 import {createSlice} from '@reduxjs/toolkit';
+import {employeeData} from "./employeeData";
 
 export const employeeSlice = createSlice({
     name: 'employees',
     initialState: {
-        employees: [
-            {
-                firstName: 'John',
-                lastName: 'Doe',
-                startDate: {startDate: '2021-01-01'},
-                department: 'Engineering',
-                dateOfBirth: {startDate: '1990-01-01'},
-                street: '123 Main St',
-                city: 'Springfield',
-                state: 'IL',
-                zipCode: '62701',
-            },
-            {
-                firstName: 'AJohn',
-                lastName: 'ADoe',
-                startDate: {startDate: '2021-01-01'},
-                department: 'Engineering',
-                dateOfBirth: {startDate: '1990-01-01'},
-                street: '123 Main St',
-                city: 'Springfield',
-                state: 'IL',
-                zipCode: '62701',
-            },
-            {
-                firstName: 'zJohn',
-                lastName: 'zDoe',
-                startDate: {startDate: '2021-01-01'},
-                department: 'Engineering',
-                dateOfBirth: {startDate: '1990-01-01'},
-                street: '123 Main St',
-                city: 'Springfield',
-                state: 'IL',
-                zipCode: '62701',
-            },
-        ],
+        employees: employeeData,
+        tableIndex: 1,
+        nbEmployeesPerPage: 10,
+        filteredEmployees: employeeData
     },
     reducers: {
         addEmployee: (state, action) => {
-            const newEmployee = action.payload
-            state.employees.push(newEmployee);
+            state.employees.push(action.payload);
         },
-        sortEmployee: (state, action) => {
-            state.employees.sort((a, b) => {
-                if (a[action.payload] < b[action.payload]) return -1;
-                if (a[action.payload] > b[action.payload]) return 1;
-                return 0;
-            });
+        setTableIndex: (state, action) => {
+            state.tableIndex = action.payload;
         },
+        tableIndexIncrement: (state) => {
+            state.tableIndex += 1;
+        },
+        tableIndexDecrement: (state) => {
+            if (state.tableIndex > 1) state.tableIndex -= 1;
+        },
+        setNbEmployeesPerPage: (state, action) => {
+            state.tableIndex = 1;
+            state.nbEmployeesPerPage = action.payload;
+        },
+        setFilteredEmployees: (state, action) => {
+            state.tableIndex = 1;
+            state.filteredEmployees = action.payload || [];
+        }
     }
 });
 
-export const { addEmployee, sortEmployee} = employeeSlice.actions;
+export const { addEmployee, setTableIndex, tableIndexDecrement, tableIndexIncrement, setNbEmployeesPerPage, setFilteredEmployees} = employeeSlice.actions;
 
 export default employeeSlice.reducer;

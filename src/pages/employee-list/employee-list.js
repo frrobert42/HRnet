@@ -1,166 +1,33 @@
 import "./employee-list.css"
 import Header from "../../components/header/header";
-import {useSelector} from "react-redux";
-import {ChevronDownIcon} from "@heroicons/react/16/solid";
-import {useState} from "react";
-
-let i = 0;
+import Pagination from "../../components/pagination/pagination";
+import SelectEmployeePerPage from "../../components/selectEmployeePerPage/selectEmployeePerPage";
+import Filter from "../../components/filter/filter";
+import Table from "../../components/table/table";
 
 export default function EmployeeList() {
-    const {employees} = useSelector((state) => state.employees);
-    const [displayEmployees, setDisplayEmployees] = useState(employees);
-
-    const sortBy = (key) => {
-        const sortedData = [...displayEmployees].sort((a, b) => (a[key] > b[key] ? 1 : -1));
-        // compare sortedData with displayEmployees
-        // if they are equal, reverse the array
-        if (JSON.stringify(sortedData) === JSON.stringify(displayEmployees)) {
-            sortedData.reverse();
-        }
-        setDisplayEmployees(sortedData);
-        console.log(key);
-    };
 
     return (
         <>
             <Header/>
+            <div className="flex flex-row px-10 gap-x-10 justify-between">
+                <div className="sm:w-1/2 md:w-1/3 lg:w-1/4">
+                    <SelectEmployeePerPage/>
+                </div>
+                <div className="sm:w-1/2 md:w-1/3 lg:w-1/4">
+                    <Filter/>
+                </div>
+            </div>
             <div className="px-4 sm:px-6 lg:px-8">
                 <div className="mt-8 flow-root">
                     <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                         <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                            <table className="min-w-full divide-y divide-gray-300">
-                                <thead>
-                                <tr>
-                                    <th scope="col"
-                                        className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                                        <button onClick={() => sortBy('firstname')} className="group inline-flex">
-                                            First Name
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                    <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        <button onClick={() => sortBy('lastName')} className="group inline-flex">
-                                            Last Name
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                    <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        <button onClick={() => sortBy('startDate')} className="group inline-flex">
-                                            Start Date
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                    <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        <button onClick={() => sortBy('department')} className="group inline-flex">
-                                            Department
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                    <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        <button onClick={() => sortBy('dateOfBirth')} className="group inline-flex">
-                                            Date of Birth
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                    <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        <button onClick={() => sortBy('street')} className="group inline-flex">
-                                            Street
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                    <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        <button onClick={() => sortBy('city')} className="group inline-flex">
-                                            City
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                    <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        <button onClick={() => sortBy('state')} className="group inline-flex">
-                                            State
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                    <th scope="col"
-                                        className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                        <button onClick={() => sortBy('zipcode')} className="group inline-flex">
-                                            Zip Code
-                                            <span
-                                                className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
-                                            <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
-                                            </span>
-                                        </button>
-                                    </th>
-                                </tr>
-                                </thead>
-                                <tbody className="divide-y divide-gray-200 bg-white">
-                                {displayEmployees && displayEmployees.map((employee) => (
-                                    <tr key={employee.firstName + i++}>
-                                        <td className="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
-                                            {employee.firstName?.charAt(0).toUpperCase() + employee.firstName?.slice(1)}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.lastName?.charAt(0).toUpperCase() + employee.lastName?.slice(1)}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.startDate?.startDate}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.department}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.dateOfBirth?.startDate}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.street}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.city?.toUpperCase()}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.state}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                            {employee.zipCode}
-                                        </td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
+                            <Table/>
                         </div>
                     </div>
                 </div>
             </div>
+            <Pagination />
         </>
     );
 }

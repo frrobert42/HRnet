@@ -9,6 +9,7 @@ import Modal from "modal-react-p14";
 import Header from "../../components/header/header";
 import {addEmployee} from "../../store/employee-reducer";
 import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 export default function CreateEmployee() {
     const [state, setState] = useState('Select State');
@@ -17,17 +18,11 @@ export default function CreateEmployee() {
     const [startDate, setStartDate] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleDateOfBirthChange = (date) => {
-        setDateOfBirth(date);
-    }
-    const handleStartDateChange = (date) => {
-        setStartDate(date);
-    }
-
-    const handleAddEmployee = (employee) => {
-        dispatch(addEmployee(employee));
-    };
+    const handleDateOfBirthChange = (date) => setDateOfBirth(date.startDate);
+    const handleStartDateChange = (date) => setStartDate(date.startDate);
+    const handleAddEmployee = (employee) => dispatch(addEmployee(employee));
 
     const saveEmployee = () => {
         // check if all fields are filled
@@ -290,6 +285,10 @@ export default function CreateEmployee() {
                 modalOpen &&
                 <Modal
                     onClose={() => {setModalOpen(false)}}
+                    onClickButton={() => {navigate('/employee-list')}}
+                    buttonMessage={"View Employee"}
+                    positionX={"right"}
+                    positionY={"top"}
                     modalMessage={"Employee saved successfully"}
                 />
             }
