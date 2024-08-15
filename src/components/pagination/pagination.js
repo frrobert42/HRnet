@@ -5,7 +5,6 @@ import {setTableIndex, tableIndexDecrement, tableIndexIncrement} from "../../sto
 export default function Pagination() {
     const {tableIndex, nbEmployeesPerPage, filteredEmployees} = useSelector((state) => state.employees);
     const dispatch = useDispatch();
-
     const nbPages = Math.ceil(filteredEmployees.length / nbEmployeesPerPage);
 
     const handleSetIndex = (index) => dispatch(setTableIndex(index));
@@ -16,30 +15,49 @@ export default function Pagination() {
 
     const index = ({ col }) => {
         const cols = [];
+
         for (let i = 0; i < col; i++) {
-            if (i+1 === tableIndex) {
-            cols.push(
-                <button
-                    key={i}
-                    className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                    {i + 1}
-                </button>
-            );
-            } else {
+            if (i + 1 === tableIndex) {
                 cols.push(
                     <button
-                        key={i}
-                        onClick={() => handleSetIndex(i + 1)}
-                        className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                        key={'activeCol-' + i}
+                        className="relative z-10 inline-flex items-center bg-indigo-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                     >
                         {i + 1}
                     </button>
                 );
+            } else {
+                if (i + 1 === 1 || i + 1 === nbPages || (i + 1 >= tableIndex - 2 && i + 1 <= tableIndex + 2)) {
+                    cols.push(
+                        <button
+                            key={'col-' + i}
+                            onClick={() => handleSetIndex(i + 1)}
+                            className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+                        >
+                            {i + 1}
+                        </button>
+                    );
+                } else if (i + 1 === tableIndex - 3 || i + 1 === tableIndex + 3) {
+                    cols.push(
+                        <button
+                            key={'colDot-' + i}
+                            onClick={() => handleSetIndex(i + 1)}
+                            className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300"
+                        >
+                            ...
+                        </button>
+                    );
+                }
             }
         }
 
-        return <div>{cols}</div>;
+        return <>
+            {cols.map((col, i) => (
+                <div key={'col' + i}>
+                    {col}
+                </div>
+            ))}
+        </>;
     };
 
     return (

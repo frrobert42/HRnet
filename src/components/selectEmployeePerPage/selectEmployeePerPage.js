@@ -9,7 +9,7 @@ export default function SelectEmployeePerPage() {
     const dispatch = useDispatch();
 
     // Number of employees per page to display
-    const arrayNbEmployeesPerPage = [10, 20, 25, 50, 100];
+    const arrayNbEmployeesPerPage = [5, 10, 20, 25, 50, 100];
 
     const handleSetNbEmployeesPerPage = (value) => dispatch(setNbEmployeesPerPage(value));
 
