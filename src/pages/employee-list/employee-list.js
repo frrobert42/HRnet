@@ -5,6 +5,11 @@ import SelectEmployeePerPage from "../../components/selectEmployeePerPage/select
 import Filter from "../../components/filter/filter";
 import Table from "../../components/table/table";
 
+/**
+ * EmployeeList component
+ * @return {JSX.Element}
+ * @constructor
+ */
 export default function EmployeeList() {
 
     return (

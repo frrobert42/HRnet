@@ -1,3 +1,7 @@
+/**
+ * mock data for the employee table
+ * @type {[{firstName: string, lastName: string, zipCode: string, city: string, street: string, dateOfBirth: string, state: string, department: string, startDate: string},{firstName: string, lastName: string, zipCode: string, city: string, street: string, dateOfBirth: string, state: string, department: string, startDate: string},{firstName: string, lastName: string, zipCode: string, city: string, street: string, dateOfBirth: string, state: string, department: string, startDate: string},{firstName: string, lastName: string, zipCode: string, city: string, street: string, dateOfBirth: string, state: string, department: string, startDate: string},{firstName: string, lastName: string, zipCode: string, city: string, street: string, dateOfBirth: string, state: string, department: string, startDate: string},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]}
+ */
 export const employeeData = [
     {
         firstName: 'John',

@@ -2,6 +2,11 @@ import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid'
 import {useDispatch, useSelector} from "react-redux";
 import {setTableIndex, tableIndexDecrement, tableIndexIncrement} from "../../store/employee-reducer";
 
+/**
+ * Pagination component
+ * @return {JSX.Element}
+ * @constructor
+ */
 export default function Pagination() {
     const {tableIndex, nbEmployeesPerPage, filteredEmployees} = useSelector((state) => state.employees);
     const dispatch = useDispatch();

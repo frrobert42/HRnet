@@ -1,6 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {employeeData} from "./employeeData";
 
+/**
+ * Slice for the employee data
+ * @type {Slice<{nbEmployeesPerPage: number, filteredEmployees, employees, tableIndex: number}, {tableIndexDecrement: *, setTableIndex: *, tableIndexIncrement: *, setFilteredEmployees: *, addEmployee: *, setNbEmployeesPerPage: *}, string, string, SliceSelectors<{nbEmployeesPerPage: number, filteredEmployees, employees, tableIndex: number}>>}
+ */
 export const employeeSlice = createSlice({
     name: 'employees',
     initialState: {

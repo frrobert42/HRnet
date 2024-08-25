@@ -2,6 +2,11 @@ import {ChevronDownIcon} from "@heroicons/react/16/solid";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 
+/**
+ * Table component
+ * @return {JSX.Element}
+ * @constructor
+ */
 export default function Table() {
     const {filteredEmployees, tableIndex, nbEmployeesPerPage} = useSelector((state) => state.employees);
     const [displayEmployees, setDisplayEmployees] = useState(filteredEmployees);

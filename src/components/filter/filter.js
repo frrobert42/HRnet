@@ -1,6 +1,11 @@
 import {useDispatch, useSelector} from "react-redux";
 import {setFilteredEmployees} from "../../store/employee-reducer";
 
+/**
+ * Filter component
+ * @return {JSX.Element}
+ * @constructor
+ */
 export default function Filter() {
     const {employees} = useSelector((state) => state.employees);
     const dispatch = useDispatch();

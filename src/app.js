@@ -3,6 +3,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import CreateEmployee from "./pages/create-employee/createEmployee";
 import EmployeeList from "./pages/employee-list/employee-list";
 
+/**
+ * App component
+ * @return {JSX.Element}
+ * @constructor
+ */
 function App() {
   return (
       <Router>

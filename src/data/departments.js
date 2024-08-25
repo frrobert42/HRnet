@@ -1,3 +1,7 @@
+/**
+ * Departments data
+ * @type {[{name: string, id: number},{name: string, id: number},{name: string, id: number},{name: string, id: number},{name: string, id: number}]}
+ */
 export const departments = [
     {
         name: 'Sales',

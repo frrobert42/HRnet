@@ -11,6 +11,11 @@ import {addEmployee} from "../../store/employee-reducer";
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * CreateEmployee component
+ * @return {JSX.Element}
+ * @constructor
+ */
 export default function CreateEmployee() {
     const [state, setState] = useState('Select State');
     const [selectedDepartment, setSelectedDepartment] = useState(null);

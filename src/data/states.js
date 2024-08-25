@@ -1,3 +1,7 @@
+/**
+ * List of states in the United States
+ * @type {[{name: string, abbreviation: string},{name: string, abbreviation: string},{name: string, abbreviation: string},{name: string, abbreviation: string},{name: string, abbreviation: string},null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null]}
+ */
 export const states = [
         {
             "name": "Alabama",

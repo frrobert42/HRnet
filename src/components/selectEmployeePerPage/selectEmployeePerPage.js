@@ -3,7 +3,11 @@ import {useDispatch, useSelector} from "react-redux";
 import {setNbEmployeesPerPage} from "../../store/employee-reducer";
 import {CheckIcon, ChevronUpDownIcon} from "@heroicons/react/16/solid";
 
-
+/**
+ * Select employee per page component
+ * @return {JSX.Element}
+ * @constructor
+ */
 export default function SelectEmployeePerPage() {
     const {nbEmployeesPerPage} = useSelector((state) => state.employees);
     const dispatch = useDispatch();
