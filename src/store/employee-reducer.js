@@ -1,5 +1,11 @@
-import {createSlice} from '@reduxjs/toolkit';
-import {employeeData} from "./employeeData";
+// eslint-disable-next-line no-unused-vars
+import {createSlice, Slice, SliceSelectors} from '@reduxjs/toolkit';
+import {employeeData, employeeMockData} from "./employeeData";
+
+let employees = employeeData;
+
+// If dev mode, we add some fake data
+if (process.env.REACT_APP_DEVMODE === 'true') employees = employeeMockData;
 
 /**
  * Slice for the employee data
@@ -8,10 +14,10 @@ import {employeeData} from "./employeeData";
 export const employeeSlice = createSlice({
     name: 'employees',
     initialState: {
-        employees: employeeData,
+        employees: employees,
         tableIndex: 1,
         nbEmployeesPerPage: 10,
-        filteredEmployees: employeeData
+        filteredEmployees: employees
     },
     reducers: {
         addEmployee: (state, action) => {
