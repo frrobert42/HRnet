@@ -18,15 +18,13 @@ import {useNavigate} from "react-router-dom";
  */
 export default function CreateEmployee() {
     const [state, setState] = useState('Select State');
-    const [selectedDepartment, setSelectedDepartment] = useState(null);
-    const [dateOfBirth, setDateOfBirth] = useState(null);
-    const [startDate, setStartDate] = useState(null);
+    const [selectedDepartment, setSelectedDepartment] = useState('');
+    const [dateOfBirth, setDateOfBirth] = useState();
+    const [startDate, setStartDate] = useState();
     const [modalOpen, setModalOpen] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const handleDateOfBirthChange = (date) => setDateOfBirth(date.startDate);
-    const handleStartDateChange = (date) => setStartDate(date.startDate);
     const handleAddEmployee = (employee) => dispatch(addEmployee(employee));
 
     const saveEmployee = () => {
@@ -37,28 +35,16 @@ export default function CreateEmployee() {
             return;
         }
 
-        // check if state is selected
-        if (state === 'Select State') {
-            alert('Please select a state');
-            return;
-        }
-
-        // check if department is selected
-        if (!selectedDepartment || selectedDepartment.name === 'Select Department') {
-            alert('Please select a department');
-            return;
-        }
-
         let employee = {
             firstName: document.getElementById('first-name').value,
             lastName: document.getElementById('last-name').value,
-            dateOfBirth: dateOfBirth,
-            startDate: startDate,
+            dateOfBirth: dateOfBirth?.startDate || '',
+            startDate: startDate?.startDate || '',
             street: document.getElementById('street').value,
             city: document.getElementById('city').value,
-            state: state,
+            state: state === 'Select State' ? '' : state,
             zipCode: document.getElementById('zip-code').value,
-            department: selectedDepartment.name
+            department: selectedDepartment?.name || ''
         }
 
         // save employee
@@ -129,8 +115,9 @@ export default function CreateEmployee() {
                                         placeholder={"Date of Birth"}
                                         asSingle={true}
                                         useRange={false}
+                                        required={true}
                                         value={dateOfBirth}
-                                        onChange={handleDateOfBirthChange}
+                                        onChange={newDate => setDateOfBirth(newDate)}
                                     />
                                 </div>
 
@@ -143,8 +130,9 @@ export default function CreateEmployee() {
                                         placeholder={"Start Date"}
                                         asSingle={true}
                                         useRange={false}
+                                        required={true}
                                         value={startDate}
-                                        onChange={handleStartDateChange}
+                                        onChange={newDate => setStartDate(newDate)}
                                     />
                                 </div>
                             </div>

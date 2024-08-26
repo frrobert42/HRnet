@@ -22,6 +22,7 @@ export const employeeSlice = createSlice({
     reducers: {
         addEmployee: (state, action) => {
             state.employees.push(action.payload);
+            state.filteredEmployees = [...state.employees];
         },
         setTableIndex: (state, action) => {
             state.tableIndex = action.payload;

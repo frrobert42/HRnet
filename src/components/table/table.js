@@ -18,9 +18,17 @@ export default function Table() {
 
     const sortBy = (key) => {
         // sort the data by key
-        const sortedData = [...displayEmployees].sort((a, b) => (a[key] < b[key] ? 1 : -1));
-        // compare sortedData with displayEmployees if they are equal, reverse the array
-        if (JSON.stringify(sortedData) === JSON.stringify(displayEmployees)) sortedData.reverse();
+        const sortedData = [...displayEmployees].sort((a, b) => {
+            if (a[key] > b[key]) return 1;
+            if (a[key] < b[key]) return -1;
+            return 0;
+        });
+        // Check if the sorted data is equal to the current displayEmployees array
+        const isSameOrder = sortedData.every((item, index) => item === displayEmployees[index]);
+
+        // If the sorted data is the same as the current, reverse it
+        if (isSameOrder) sortedData.reverse();
+
         // set the sorted data to displayEmployees
         setDisplayEmployees(sortedData);
     };
@@ -131,7 +139,7 @@ export default function Table() {
                             {employee.department}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                            {employee.startDate}
+                            {employee.dateOfBirth}
                         </td>
                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                             {employee.street}
