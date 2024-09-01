@@ -16,6 +16,7 @@ export default function Table() {
         setDisplayEmployees(filteredEmployees);
     }, [filteredEmployees]);
 
+
     const sortBy = (key) => {
         // sort the data by key
         const sortedData = [...displayEmployees].sort((a, b) => {
@@ -40,7 +41,7 @@ export default function Table() {
             <tr>
                 <th scope="col"
                     className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
-                    <button onClick={() => sortBy('firstname')} className="group inline-flex">
+                    <button onClick={() => sortBy('firstName')} className="group inline-flex">
                         First Name<span
                         className="invisible ml-2 flex-none rounded text-gray-400 group-hover:visible group-focus:visible">
                             <ChevronDownIcon aria-hidden="true" className="h-5 w-5"/>
